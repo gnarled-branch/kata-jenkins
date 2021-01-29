@@ -33,7 +33,7 @@ variable "region" {
 variable "app" {
   type        = string
   description = "Name of application"
-  default     = "terraform-kata"
+  default     = "terraform-kata-demo1"
 }
 variable "zone" {
   default = "us-east-2b"
