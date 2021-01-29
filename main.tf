@@ -1,6 +1,6 @@
 terraform {
   backend "remote" {
-    organization = "code-liberation-front"
+    organization = "kata-fridays"
 
     workspaces {
       name = "terraform-kata"
