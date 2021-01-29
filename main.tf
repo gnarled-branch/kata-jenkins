@@ -3,7 +3,7 @@ terraform {
     organization = "kata-fridays"
 
     workspaces {
-      name = "terraform-kata"
+      name = "terraform-kata-demo"
     }
   }
 }
