@@ -24,7 +24,8 @@ def loadValuesYaml(x){
 
 pipeline {
   environment {
-  //credentials
+  	    cloudProvider = loadValuesYaml('cloudProvider')
+	  //credentials
 	    dockerHubCredential = loadValuesYaml('dockerHubCredential')
             awsCredential = loadValuesYaml('awsCredential')
 	    
@@ -41,6 +42,7 @@ pipeline {
 	    successAction = loadValuesYaml('successAction')
 	    failureAction = loadValuesYaml('failureAction')  
 	    app_url = ''      
+	  
 	    
    }
     agent any
