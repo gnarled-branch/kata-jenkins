@@ -26,7 +26,8 @@ pipeline {
 	    successAction = loadValuesYaml('successAction')
 	    failureAction = loadValuesYaml('failureAction')  
 	    app_url = ''      
-	    
+	    //stores token to use terraform cloud
+	    TF_CLI_CONFIG_FILE='/var/jenkins_home/.terraformrc' 
    }
     agent any
     stages {
