@@ -141,22 +141,12 @@ pipeline {
     }
     post { 
         success {
-          
-		slackSend channel:  "${slackChannel}",
-          	color: COLOR_MAP[currentBuild.currentResult],
-          	message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}\n APP_URL:${app_url}"
-          
-	  	sh "${successAction}"
-        
+      hangoutsNotify message: "Chris Gallivan:::SUCCESS - node:12-alpine",token: "8TAhr5dP97wKtVlaaWya6Hn5l", threadByJob: true    
+		
         }
     
         failure {
-	  	slackSend channel:  "${slackChannel}",
-          	color: COLOR_MAP[currentBuild.currentResult],
-          	message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}\n"
-          
-		sh "${failureAction}"
-        
+	  	hangoutsNotify message: "Chris Gallivan:::FAILURE - node:12-alpine",token: "8TAhr5dP97wKtVlaaWya6Hn5l", threadByJob: true
         }
-    }
+   }
 }
