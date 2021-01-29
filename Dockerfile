@@ -6,9 +6,13 @@ FROM node:12 as build-test
 WORKDIR /app
 
 #install dependencies
+COPY package*.json ./
+
+RUN npm install
+
 COPY . .
 
-RUN npm install-test
+RUN npm test
     
 # run lean image
 FROM node:12-alpine as run    
@@ -17,9 +21,11 @@ FROM node:12-alpine as run
 WORKDIR /app
 
 #install dependencies
-COPY . .
+COPY package*.json ./
 
 RUN npm install
+
+COPY . .
 
 EXPOSE 3000
 
