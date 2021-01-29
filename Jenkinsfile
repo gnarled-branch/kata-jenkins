@@ -26,13 +26,8 @@ pipeline {
    }
     agent any
     stages {
-           // stage('Build Node App') {
-             //   steps {
-               //     echo 'Building Node app...'
-		 //   sh 'npm install-test'
-  		 //}
-           //}
-stage('Build Docker Image') {
+      
+          stage('Build Docker Image') {
              steps {
                 script{
                     echo 'Building Docker image...'
@@ -41,7 +36,20 @@ stage('Build Docker Image') {
 		                }
                 }
              }
-        }	    
+        }
+	   stage('Deploy to Docker Hub') {
+            steps {
+               script {
+                    echo 'Publishing Image to Docker Hub...'
+                    docker.withRegistry( '', dockerHubCredential ) {
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push('latest')   
+                    }
+                    echo 'Removing Image...'
+                    sh "docker rmi $imageName:$BUILD_NUMBER"
+                    sh "docker rmi $imageName:latest"                 }
+                }
+            }
 	    
        }
     post { 
