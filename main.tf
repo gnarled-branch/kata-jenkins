@@ -1,7 +1,6 @@
 terraform {
   backend "remote" {
     organization = "KATA-FRIDAYS"
-    hostname = "app.terraform.io"
     workspaces {
       name = "terraform-kata-demo-amazing"
     }
