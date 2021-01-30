@@ -17,7 +17,7 @@ RUN npm test
 FROM build-test as security-scan
 
 RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin \
-    && trivy filesystem --severity HIGH,CRITICAL --exit-code 1 --no-progress /
+    && trivy filesystem --severity HIGH,CRITICAL --light --exit-code 1 --no-progress /
 
 
 # run lean image
