@@ -14,11 +14,6 @@ COPY . .
 
 RUN npm test
 
-FROM build-test as security-scan
-
-RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin \
-    && trivy filesystem --severity HIGH,CRITICAL --light --exit-code 1 --no-progress /
-
 
 # run lean image
 FROM node:12-alpine as run    
@@ -31,7 +26,16 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY *.js .
+
+
+FROM run as security-scan
+
+RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin \
+    && trivy fs --light --severity HIGH  --exit-code 1 --no-progress /
+
+
+FROM run
 
 EXPOSE 3000
 
