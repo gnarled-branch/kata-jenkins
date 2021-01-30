@@ -26,7 +26,7 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY *.js .
+COPY *.js ./
 
 
 FROM run as security-scan
