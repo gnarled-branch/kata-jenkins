@@ -32,7 +32,7 @@ COPY *.js ./
 FROM run as security-scan
 
 RUN apk add curl && curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin \
-    && trivy fs --severity HIGH,CRITICAL  --exit-code 1 --no-progress /
+    && trivy fs --severity HIGH,CRITICAL,MEDIUM  --exit-code 1 --no-progress /
 
 
 FROM run
